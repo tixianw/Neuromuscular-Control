@@ -1,0 +1,2 @@
+from .neuralctrl_Matsuoka import NeuralControlMatsuoka
+from .neuralctrl_FitzHugh_Nagumo import NeuralControlFitzHughNagumo

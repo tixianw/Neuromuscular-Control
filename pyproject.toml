@@ -1,0 +1,80 @@
+# Poetry pyproject.toml: https://python-poetry.org/docs/pyproject/
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "Neuromuscular_Control"
+version = "0.0.1"
+description = "Neuromuscular control framework for controlling octopus arm models"
+readme = "README.md"
+authors = ["Tixian Wang <tixianw2@illinois.edu>","Arman Tekinalp <armant2@illinois.edu>"]
+license = "MIT"
+repository = "https://github.com/tixianw/Neuromuscular_Control.git"
+
+# ...
+packages = [
+    { include = "neuromuscular_control" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+numpy = "^1.20.0"
+numba = "^0.55"
+scipy = "^1.7.3"
+pyelastica = "^0.3"
+matplotlib = "^3.3.2"
+click = {version = "^8.1", optional = true, extras = ["examples"]}
+coomm = {version = ">=0.0.1.post2", optional = true, extras = ["examples"]}
+# sopht = { git = "https://github.com/SophT-Team/SophT.git", branch = "main" }
+
+[tool.poetry.dev-dependencies]
+black = "^22.3.0"
+flake8 = "^4.0.1"
+pre-commit = "^2.19.0"
+pytest = "^7.0.1"
+coverage = "^6.3.2"
+pytest-cov = "^3.0.0"
+mypy = "^0.982"
+
+[tool.poetry.extras]
+examples = ["click", "coomm"]
+
+[tool.black]
+# https://github.com/psf/black
+target-version = ["py310"]
+line-length = 88
+color = true
+
+exclude = '''
+/(
+    \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    | env
+    | venv
+)/
+'''
+
+[tool.mypy]
+# https://mypy.readthedocs.io/en/latest/config_file.html#using-a-pyproject-toml-file
+python_version = "3.10"
+pretty = true
+show_traceback = true
+color_output = true
+check_untyped_defs = false
+ignore_missing_imports = true
+show_column_numbers = true
+show_error_codes = true
+show_error_context = true
+
+[tool.pytest.ini_options]
+# https://docs.pytest.org/en/6.2.x/customize.html#pyproject-toml
+# Directories that are not visited by pytest collector:
+norecursedirs =["hooks", "*.egg", ".eggs", "dist", "build", "docs", ".tox", ".git", "__pycache__"]
